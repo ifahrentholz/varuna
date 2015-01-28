@@ -1,5 +1,1 @@
-# Ignore all logfiles and tempfiles.
-/log/*.log
-
-# Ignore Vim swap files
-*.sw*
+node_modules/
