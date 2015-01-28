@@ -13,18 +13,16 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the funkadelic' + chalk.red('Varuna') + ' generator!'
+      'Welcome to the frontend generator by ]init['
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      name: 'appName',
+      message: 'What is your app\'s name ?',
     }];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
+      this.appName = props.appName;
 
       done();
     }.bind(this));
@@ -32,6 +30,10 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
+      this.fs.copy(
+        this.templatePath('stylesheets/'),
+        this.destinationPath('stylesheets/')
+      );
       this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
@@ -54,9 +56,11 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
+  /*
   install: function () {
     this.installDependencies({
       skipInstall: this.options['skip-install']
     });
   }
+  */
 });
