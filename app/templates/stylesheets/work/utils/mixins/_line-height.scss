@@ -1,0 +1,16 @@
+// The rem line-height unit is similar to em,
+// only instead of cascading it's always relative to the root (html) element.
+// This is pretty good supported by modern browser.
+// For IE 8 and down a px fallbacks is provided.
+//
+// To set the line-height, just put in your pixel value from the design.
+
+@mixin line-height($sizeValue) {
+    @if unitless($sizeValue) {
+      line-height: $sizeValue + px; //IE8 Fallback
+      line-height: rem($sizeValue);
+    } @else {
+      line-height: $sizeValue; //IE8 Fallback
+	  line-height: rem(strip-units($sizeValue));
+    }
+}

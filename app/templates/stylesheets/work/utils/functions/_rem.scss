@@ -1,0 +1,7 @@
+// The rem font-size unit is similar to em,
+// only instead of cascading it's always relative to the root (html) element.
+// This is pretty good supported by modern browser.
+
+@function rem($sizeValue) {
+	@return ($sizeValue / (strip-units($font-size-base))) + rem; // 16: browser base font
+}

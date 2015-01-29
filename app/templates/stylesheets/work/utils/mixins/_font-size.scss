@@ -1,0 +1,17 @@
+// The rem font-size unit is similar to em,
+// only instead of cascading it's always relative to the root (html) element.
+// This is pretty good supported by modern browser.
+// For IE 8 and down a px fallbacks is provided.
+//
+// To set the font-size, just put in your pixel value from the design.
+
+@mixin font-size($sizeValue) {
+    @if unitless($sizeValue) {
+      font-size: $sizeValue + px; //IE8 Fallback
+	  font-size: rem($sizeValue);
+    } @else {
+      font-size: $sizeValue; //IE8 Fallback
+	  font-size: rem(strip-units($sizeValue));
+    }
+    
+}

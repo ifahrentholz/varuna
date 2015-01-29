@@ -1,0 +1,7 @@
+/*
+ * $target-fs = target font-size [int]
+ * $context = context font-size [int] || default = $base-font-size;
+ */
+@function em($target-fs, $context: $base-font-size) {
+  @return ($target-fs / $context) * 1em;
+}

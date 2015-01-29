@@ -1,5 +1,5 @@
 {
-  "name": "<%= _.slugify(projectname) %>",
+  "name": "<%= _.slugify(this.appName) %>",
   "version": "0.0.1",
   "description": "TODO description",
   "author": "init ag",

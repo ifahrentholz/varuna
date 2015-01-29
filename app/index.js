@@ -34,6 +34,8 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('stylesheets/'),
         this.destinationPath('stylesheets/')
       );
+      this.mkdir('stylesheets/work/utils/extends');
+      this.mkdir('stylesheets/work/utils/helper');
       this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
