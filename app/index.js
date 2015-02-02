@@ -37,10 +37,6 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir('stylesheets/work/utils/extends');
       this.mkdir('stylesheets/work/utils/helper');
       this.fs.copy(
-        this.templatePath('_Gruntfile.js'),
-        this.destinationPath('Gruntfile.js')
-      );
-      this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
       );
@@ -62,9 +58,11 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
+  /*
   install: function () {
     this.installDependencies({
       skipInstall: this.options['skip-install']
     });
   }
+  */
 });
