@@ -7,15 +7,6 @@ module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
   },
-  
-  constructor: function () {
-    generators.Base.apply(this, arguments);
-
-    // This method adds support for a `--coffee` flag
-    this.option('coffee');
-    // And you can then access it later on this way; e.g.
-    this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
-  },
 
   /*prompting: function () {
     var done = this.async();
@@ -56,11 +47,11 @@ module.exports = yeoman.generators.Base.extend({
       name: 'features',
       message: 'What would you like to include?',
       choices: [{
-        name: 'Bootstrap',
+        name: 'Bootstrap Basic (css)',
         value: 'includeBootstrap',
         checked: false
       },{
-        name: 'Bootsrap + Sass',
+        name: 'Bootstrap Sass (scss)',
         value: 'includeSass',
         checked: false
       },{
@@ -106,12 +97,17 @@ module.exports = yeoman.generators.Base.extend({
       private: true,
       dependencies: {}
     };
+    
+    bower.dependencies.jquery = "~1.11.1";
 
     if (this.includeBootstrap) {
-      var bs = 'bootstrap' + (this.includeSass ? '-sass-official' : '');
-      bower.dependencies[bs] = "~3.2.0";
-    } else {
-      bower.dependencies.jquery = "~1.11.1";
+      var bs = 'bootstrap';
+      bower.dependencies[bs] = "*";
+    }
+    
+    if (this.includeSass) {
+      var bs = 'bootstrap-sass-official';
+      bower.dependencies[bs] = "*";
     }
 
     if (this.includeModernizr) {
