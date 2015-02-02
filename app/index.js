@@ -8,6 +8,35 @@ module.exports = yeoman.generators.Base.extend({
     this.pkg = require('../package.json');
   },
   
+  constructor: function () {
+    generators.Base.apply(this, arguments);
+
+    // This method adds support for a `--coffee` flag
+    this.option('coffee');
+    // And you can then access it later on this way; e.g.
+    this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
+  },
+
+  /*prompting: function () {
+    var done = this.async();
+
+    // Have Yeoman greet the user.
+    this.log(yosay(
+      'Welcome to the frontend generator by ]init['
+    ));
+
+    var prompts = [{
+      name: 'appName',
+      message: 'What is your app\'s name ?',
+    }];
+
+    this.prompt(prompts, function (props) {
+      this.appName = props.appName;
+
+      done();
+    }.bind(this));
+  },*/
+  
   askFor: function () {
     var done = this.async();
 
@@ -25,13 +54,13 @@ module.exports = yeoman.generators.Base.extend({
     var prompts = [{
       type: 'checkbox',
       name: 'features',
-      message: 'What more would you like?',
+      message: 'What would you like to include?',
       choices: [{
         name: 'Bootstrap',
         value: 'includeBootstrap',
         checked: false
       },{
-        name: 'Sass',
+        name: 'Bootsrap + Sass',
         value: 'includeSass',
         checked: false
       },{
@@ -39,7 +68,8 @@ module.exports = yeoman.generators.Base.extend({
         value: 'includeModernizr',
         checked: true
       }]
-    }, {
+    }, 
+    {
       when: function (answers) {
         return answers && answers.features &&
           answers.features.indexOf('includeSass') !== -1;
