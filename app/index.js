@@ -7,15 +7,6 @@ module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
   },
-  
-  constructor: function () {
-    generators.Base.apply(this, arguments);
-
-    // This method adds support for a `--coffee` flag
-    this.option('coffee');
-    // And you can then access it later on this way; e.g.
-    this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
-  },
 
   /*prompting: function () {
     var done = this.async();
@@ -56,11 +47,11 @@ module.exports = yeoman.generators.Base.extend({
       name: 'features',
       message: 'What would you like to include?',
       choices: [{
-        name: 'Bootstrap',
+        name: 'Bootstrap Basic (css)',
         value: 'includeBootstrap',
         checked: false
       },{
-        name: 'Bootsrap + Sass',
+        name: 'Bootstrap Sass (scss)',
         value: 'includeSass',
         checked: false
       },{
@@ -81,6 +72,49 @@ module.exports = yeoman.generators.Base.extend({
         chalk.green('https://github.com/andrew/node-sass#node-sass'),
       default: false*/
     }];
+      this.prompt(prompts, function (answers) {
+      var features = answers.features;
+
+      function hasFeature(feat) {
+        return features && features.indexOf(feat) !== -1;
+      }
+
+      this.includeSass = hasFeature('includeSass');
+      this.includeBootstrap = hasFeature('includeBootstrap');
+      this.includeModernizr = hasFeature('includeModernizr');
+
+      this.includeLibSass = answers.libsass;
+      this.includeRubySass = !answers.libsass;
+
+      done();
+    }.bind(this));
+  },
+  
+  bower: function () {
+    var bower = {
+      name: this._.slugify(this.appname),
+      private: true,
+      dependencies: {}
+    };
+    
+    bower.dependencies.jquery = "~1.11.1";
+
+    if (this.includeBootstrap) {
+      var bs = 'bootstrap';
+      bower.dependencies[bs] = "*";
+    }
+    
+    if (this.includeSass) {
+      var bs = 'bootstrap-sass-official';
+      bower.dependencies[bs] = "*";
+    }
+
+    if (this.includeModernizr) {
+      bower.dependencies.modernizr = "~2.8.2";
+    }
+
+    this.copy('bowerrc', '.bowerrc');
+    this.write('bower.json', JSON.stringify(bower, null, 2));
   },
 
   writing: {
