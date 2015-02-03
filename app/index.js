@@ -60,10 +60,6 @@ module.exports = yeoman.generators.Base.extend({
       name: 'features',
       message: 'What would you like to include?',
       choices: [{
-        name: 'Bootstrap Basic (css)',
-        value: 'includeBootstrap',
-        checked: false
-      },{
         name: 'Bootstrap Sass (scss)',
         value: 'includeSass',
         checked: false
@@ -98,7 +94,6 @@ module.exports = yeoman.generators.Base.extend({
       }
 
       this.includeSass = hasFeature('includeSass');
-      this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
       this.includejQuery = hasFeature('includejQuery');
 
@@ -118,12 +113,6 @@ module.exports = yeoman.generators.Base.extend({
     
     if (this.includejQuery) {
       bower.dependencies.jquery = "~1.11.1";
-    }
-    
-
-    if (this.includeBootstrap) {
-      var bs = 'bootstrap';
-      bower.dependencies[bs] = "*";
     }
     
     if (this.includeSass) {
