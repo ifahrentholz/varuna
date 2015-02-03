@@ -114,7 +114,7 @@ module.exports = yeoman.generators.Base.extend({
     if (this.includejQuery) {
       bower.dependencies.jquery = "~1.11.1";
     }
-    
+      
     if (this.includeSass) {
       var bs = 'bootstrap-sass-official';
       bower.dependencies[bs] = "*";
