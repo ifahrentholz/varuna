@@ -16,10 +16,13 @@ module.exports = yeoman.generators.Base.extend({
       'Welcome to the frontend generator by ]init['
     ));
 
-    var prompts = [{
-      name: 'appName',
-      message: 'What is your app\'s name ?',
-    }];
+    var prompts = [
+      {
+        name: 'appName',
+        message: 'What is your app\'s name ?',
+        default: 'Your AppName'
+      }
+    ];
 
     this.prompt(prompts, function (props) {
       this.appName = props.appName;
@@ -40,7 +43,7 @@ module.exports = yeoman.generators.Base.extend({
        this.templatePath('_Gruntfile.js'),
        this.destinationPath('Gruntfile.js')
      );
-      this.fs.copy(
+      this.template(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
       );
