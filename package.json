@@ -18,7 +18,9 @@
     "test": "mocha"
   },
   "files": [
-    "app"
+    "app",
+    "-component",
+    "component"
   ],
   "keywords": [
     "yeoman-generator"
