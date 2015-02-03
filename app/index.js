@@ -7,6 +7,19 @@ module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
   },
+  
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
+    
+    // This method adds support for a `--skip-install` flag
+    this.option('skip-install', {
+      desc: 'Skips the installation of dependencies',
+      type: Boolean
+    });
+    
+    // This method adds support for a `--coffee` flag
+    this.option('coffee');
+  },
 
   /*prompting: function () {
     var done = this.async();
@@ -58,9 +71,13 @@ module.exports = yeoman.generators.Base.extend({
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: true
+      },{
+        name: 'jQuery',
+        value: 'includejQuery',
+        checked: true
       }]
-    }, 
-    {
+    } 
+    /*{
       when: function (answers) {
         return answers && answers.features &&
           answers.features.indexOf('includeSass') !== -1;
@@ -71,7 +88,7 @@ module.exports = yeoman.generators.Base.extend({
       message: 'Would you like to use libsass? Read up more at \n' +
         chalk.green('https://github.com/andrew/node-sass#node-sass'),
       default: false
-    }];
+    }*/];
 
     this.prompt(prompts, function (answers) {
       var features = answers.features;
@@ -83,6 +100,7 @@ module.exports = yeoman.generators.Base.extend({
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
+      this.includejQuery = hasFeature('includejQuery');
 
       this.includeLibSass = answers.libsass;
       this.includeRubySass = !answers.libsass;
@@ -98,7 +116,10 @@ module.exports = yeoman.generators.Base.extend({
       dependencies: {}
     };
     
-    bower.dependencies.jquery = "~1.11.1";
+    if (this.includejQuery) {
+      bower.dependencies.jquery = "~1.11.1";
+    }
+    
 
     if (this.includeBootstrap) {
       var bs = 'bootstrap';
@@ -136,6 +157,9 @@ module.exports = yeoman.generators.Base.extend({
       );
     },
 
+    // And you can then access it later on this way; e.g.
+    //this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
+      
     projectfiles: function () {
       this.fs.copy(
         this.templatePath('editorconfig'),
