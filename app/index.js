@@ -21,26 +21,6 @@ module.exports = yeoman.generators.Base.extend({
     this.option('coffee');
   },
 
-  /*prompting: function () {
-    var done = this.async();
-
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the frontend generator by ]init['
-    ));
-
-    var prompts = [{
-      name: 'appName',
-      message: 'What is your app\'s name ?',
-    }];
-
-    this.prompt(prompts, function (props) {
-      this.appName = props.appName;
-
-      done();
-    }.bind(this));
-  },*/
-  
   askFor: function () {
     var done = this.async();
 
