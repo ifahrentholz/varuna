@@ -7,10 +7,7 @@ module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
   },
-
-  prompting: function () {
-    var done = this.async();
-
+  
   constructor: function () {
     yeoman.generators.Base.apply(this, arguments);
     
@@ -73,21 +70,13 @@ module.exports = yeoman.generators.Base.extend({
       default: false
     }*/];
 
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the frontend generator by ]init['
-    ));
+    this.prompt(prompts, function (answers) {
+      var features = answers.features;
 
-    var prompts = [
-      {
-        name: 'appName',
-        message: 'What is your app\'s name ?',
-        default: 'Your AppName'
+      function hasFeature(feat) {
+        return features && features.indexOf(feat) !== -1;
       }
-    ];
 
-    this.prompt(prompts, function (props) {
-      this.appName = props.appName;
       this.includeSass = hasFeature('includeSass');
       this.includeBootstrap = hasFeature('includeBootstrap');
       this.includeModernizr = hasFeature('includeModernizr');
@@ -139,16 +128,12 @@ module.exports = yeoman.generators.Base.extend({
       this.mkdir('stylesheets/work/utils/extends');
       this.mkdir('stylesheets/work/utils/helper');
       this.fs.copy(
-       this.templatePath('_Gruntfile.js'),
-       this.destinationPath('Gruntfile.js')
-     );
-      this.template(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json')
+        this.templatePath('_Gruntfile.js'),
+        this.destinationPath('Gruntfile.js')
       );
       this.fs.copy(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json')
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json')
       );
     },
 
@@ -167,11 +152,9 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
-  /*
   install: function () {
     this.installDependencies({
       skipInstall: this.options['skip-install']
     });
   }
-  */
 });
