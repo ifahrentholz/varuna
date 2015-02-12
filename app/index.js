@@ -11,18 +11,6 @@ module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
 
-  constructor: function () {
-    yeoman.generators.Base.apply(this, arguments);
-    
-    // This method adds support for a `--skip-install` flag
-    this.option('skip-install', {
-      desc: 'Skips the installation of dependencies',
-      type: Boolean
-    });
-    
-    // This method adds support for a `--coffee` flag
-    this.option('coffee');
-  },
 
   askFor: function () {
     var done = this.async();
