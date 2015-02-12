@@ -20,7 +20,8 @@
   "files": [
     "app",
     "-component",
-    "component"
+    "component",
+    "scaffold"
   ],
   "keywords": [
     "yeoman-generator"
