@@ -16,11 +16,11 @@ module.exports = yeoman.generators.Base.extend({
   writing: function () {
     this.template(
       this.templatePath('_component.scss'),
-      this.destinationPath('stylesheets/work/components/'+ this._.slugify(this.name) +'/_'+ this._.slugify(this.name) +'.scss')
+      this.destinationPath('src/scss/work/components/'+ this._.slugify(this.name) +'/_'+ this._.slugify(this.name) +'.scss')
     );
     this.template(
       this.templatePath('component.js'),
-      this.destinationPath('javascripts/work/bundle/components/'+ this._.slugify(this.name) +'/'+ this._.slugify(this.name) +'.js')
+      this.destinationPath('src/js/work/bundle/components/'+ this._.slugify(this.name) +'/'+ this._.slugify(this.name) +'.js')
     );
   }
 });

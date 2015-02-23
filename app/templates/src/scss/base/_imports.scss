@@ -1,3 +1,7 @@
+// IMPORT VARS
+// ==========================================================================
+@import 'vars';
+
 // IMPORT COMPASS FRAMEWORK
 // ==========================================================================
 @import "compass";
@@ -27,11 +31,12 @@
 
 // IMPORT COMMON/ (common/*)
 // ==========================================================================
+@import 'common/fonts';
+@import 'common/footer';
+@import 'common/header';
+@import 'common/layout';
 
 
-// IMPORT COMMON/COMPONENTS (common/components/*)
+// IMPORT COMPONENTS (components/*)
 // ==========================================================================
 
-
-// IMPORT js-libs styles (/*)
-// ==========================================================================

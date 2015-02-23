@@ -2,13 +2,14 @@ module.exports = function(grunt) {
   
   require('load-grunt-tasks')(grunt);
   
-  var globalConfig = {
-    imgSrc: 'images',
-    fontSrc: 'fonts',
-    jsSrc: 'javascripts/work',
-    jsDest: 'javascripts/dist',
-    cssSrc: 'stylesheets/work',
-    cssDest: 'stylesheets/dist',
+  var globalConfigBase = {
+    imgSrc: 'img/base',
+    fontSrc: 'fonts/base',
+    jsSrc: 'js/base',
+    jsDest: 'dist/base/js',
+    cssSrc: 'scss/base',
+    cssDest: 'dist/base/css',
+    vendorSrc: 'vendor/'
   };
 
   // Project configuration.
@@ -39,23 +40,6 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       
-      jQuery: {
-        src: [
-          '<%= globalConfig.jsSrc %>/utils/libs/jquery-1.11.2.min.js',
-          '<%= globalConfig.jsSrc %>/utils/libs/jquery-migrate-1.2.1.min.js',
-         ],
-        dest: '<%= globalConfig.jsDest %>/jquery.js'
-      },
-
-      plugins: {
-        src: [
-          '<%= globalConfig.jsSrc %>/utils/bootstrap.js',
-          '<%= globalConfig.jsSrc %>/utils/bootstrap/*.js',
-          '<%= globalConfig.jsSrc %>/utils/libs/slick.js'
-         ],
-        dest: '<%= globalConfig.jsDest %>/plugin.js'
-      },
-
       main: {
         src: [
           /* scripts written by init + initialize */
@@ -139,6 +123,7 @@ module.exports = function(grunt) {
           except: ['jQuery']
         },
         banner: '<%= banner %>',
+        preserveComments: 'some',
         report: 'min'
       },
       build: {
