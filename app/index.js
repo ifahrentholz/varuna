@@ -39,7 +39,8 @@ module.exports = yeoman.generators.Base.extend({
       type: 'checkbox',
       name: 'features',
       message: 'What would you like to include?',
-      choices: [{
+      choices: [
+      /*{
         name: 'Bootstrap Basic (css)',
         value: 'includeBootstrap',
         checked: false
@@ -47,7 +48,7 @@ module.exports = yeoman.generators.Base.extend({
         name: 'Bootstrap Sass (scss)',
         value: 'includeSass',
         checked: false
-      },{
+      },*/{
         name: 'Modernizr',
         value: 'includeModernizr',
         checked: true
