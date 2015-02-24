@@ -3,11 +3,11 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
   
   var globalConfigBase = {
-    imgSrc: 'img/base',
-    fontSrc: 'fonts/base',
-    jsSrc: 'js/base',
+    imgSrc: 'src/img/base',
+    fontSrc: 'src/fonts/base',
+    jsSrc: 'src/js/base',
     jsDest: 'dist/base/js',
-    cssSrc: 'scss/base',
+    cssSrc: 'src/scss/base',
     cssDest: 'dist/base/css',
     vendorSrc: 'vendor/'
   };
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     
     pkg: grunt.file.readJSON('package.json'),
-    globalConfig: globalConfig,
+    globalConfig: globalConfigBase,
     banner : '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' + '<%= pkg.author %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n\n',
 
     clean: {
@@ -39,18 +39,23 @@ module.exports = function(grunt) {
         banner: '<%= banner %>',
         stripBanners: true
       },
-      
+            
       main: {
         src: [
           /* scripts written by init + initialize */
-          '<%= globalConfig.jsSrc %>/bundle/*.js',
+          '<%= globalConfig.jsSrc %>/bundle/**/*.js',
           '<%= globalConfig.jsSrc %>/main.js'
-          
-          
         ], 
         dest: '<%= globalConfig.jsDest %>/main.js' 
       }
     },
+
+    bower_concat: {
+      all: {
+        dest: '<%= globalConfig.jsDest %>/vendor/libs.js', 
+        cssDest: '<%= globalConfig.cssDest %>/vendor/libs.css'
+      }
+    }, 
 
     compass: {
       options: {
@@ -65,8 +70,7 @@ module.exports = function(grunt) {
         options: {
         environment: 'production',
         outputStyle: 'compressed',
-        noLineComments: true,
-        banner: '<%= banner %>'
+        noLineComments: true
       }
     },
       dev: {
@@ -128,20 +132,20 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-        '<%= globalConfig.jsDest %>/main.min.js': ['<%= globalConfig.jsDest %>/main.js'],
-        '<%= globalConfig.jsDest %>/plugin.min.js': ['<%= globalConfig.jsDest %>/plugin.js']
+        '<%= globalConfig.jsDest %>/vendor/libs.min.js': ['<%= globalConfig.jsDest %>/vendor/libs.js'],
+        '<%= globalConfig.jsDest %>/main.min.js': ['<%= globalConfig.jsDest %>/main.js']
         }
       }
     }
   });
 
   /* PRODUCTION */
-  grunt.registerTask('default', ['clean:build', 'concat', 'compass:prod', 'uglify']);
+  grunt.registerTask('default', ['clean:build', 'concat', 'bower_concat', 'compass:prod', 'uglify']);
   
 
   /* DEVELOPMENT */
   grunt.registerTask('build-sass', ['compass:dev', 'notify:sass']);
-  grunt.registerTask('build-js', ['clean:js', 'concat', 'notify:js']);
+  grunt.registerTask('build-js', ['clean:js', 'bower_concat', 'concat', 'notify:js']);
   grunt.registerTask('watch-it', ['watch']);
 
 };

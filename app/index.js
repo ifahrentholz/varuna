@@ -122,11 +122,11 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
     app: function () {
       this.fs.copy(
-        this.templatePath('src/scss/'),
-        this.destinationPath('src/scss/')
+        this.templatePath('src/'),
+        this.destinationPath('src')
       );
-      this.mkdir('src/scss/work/utils/extends');
-      this.mkdir('src/scss/work/utils/helper');
+      this.mkdir('src/scss/base/utils/extends');
+      this.mkdir('src/scss/base/utils/helper');
       this.fs.copy(
         this.templatePath('_Gruntfile.js'),
         this.destinationPath('Gruntfile.js')
