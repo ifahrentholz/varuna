@@ -1,7 +1,7 @@
 'use strict';
 var yeoman = require('yeoman-generator');
 
-module.exports = yeoman.generators.Base.extend({
+module.exports = generators.NamedBase.extend({
   initializing: function () {
     this.log('You called the Varuna subgenerator with the argument ' + this.name + '.');
     this.pkg = require('../package.json');
