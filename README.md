@@ -1,4 +1,4 @@
-# generator-varuna [![Build Status](https://secure.travis-ci.org/ifahrentholz/generator-varuna.png?branch=master)](https://travis-ci.org/ifahrentholz/generator-varuna)
+# generator-varuna [![Build Status](https://secure.travis-ci.org/ifahrentholz/varuna.png?branch=master)](https://travis-ci.org/ifahrentholz/varuna)
 
 > [Yeoman](http://yeoman.io) generator
 
